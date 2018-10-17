@@ -6,7 +6,7 @@
 First, install `gulp-jsmart-copernica` as a development dependency:
 
 ```shell
-npm install --save-dev gulp-jsmart-copernica
+npm install --save git@github.com:jwellner/gulp-jsmart-copernica.git
 ```
 
 Then, add it to your `gulpfile.js`:
