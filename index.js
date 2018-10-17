@@ -6,15 +6,9 @@ const jSmart = require('jsmart');
  * Copernica Database structure
  */
 var _DB = {
-	"Profiles": [
-
-	],
-	"Content": [
-
-	],
-	"Tiles": [
-
-	]
+	"Profiles": [],
+	"Content": [],
+	"Tiles": []
 };
 
 /**
@@ -112,6 +106,8 @@ module.exports = function (options) {
 
 				if (options.profileId) {
 					profileData = _DB["Profiles"][options.profileId];
+				} else {
+					profileData = _DB["Profiles"][0];
 				}
 
         let filePath = file.path;
