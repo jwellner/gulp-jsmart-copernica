@@ -2,7 +2,20 @@ const through = require('through2');
 const PluginError = require('plugin-error');
 const jSmart = require('jsmart');
 
-var _DB = {};
+/**
+ * Copernica Database structure
+ */
+var _DB = {
+	"Profiles": [
+
+	],
+	"Content": [
+
+	],
+	"Tiles": [
+
+	]
+};
 
 /**
  * Custom functions
@@ -75,6 +88,9 @@ jSmart.prototype.registerPlugin(
 );
 
 module.exports = function (options) {
+		if (!options) {
+			options = {};
+		}
 
     return through.obj(function (file, enc, cb) {
 
@@ -84,16 +100,19 @@ module.exports = function (options) {
         }
 
         if (file.isStream()) {
-        this.emit('error', new PluginError('gulp-nunjucks', 'Streaming not supported'));
+        this.emit('error', new PluginError('gulp-jsmart-copernica', 'Streaming not supported'));
         return cb();
         }
 
         if (file.data) {
             _DB = file.data;
-        }
+				}
 
-        // get profile data
-        const profileData = _DB["Profiles"][0];
+				var profileData = {}
+
+				if (options.profileId) {
+					profileData = _DB["Profiles"][options.profileId];
+				}
 
         let filePath = file.path;
 
