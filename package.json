@@ -1,6 +1,6 @@
 {
   "name": "gulp-jsmart-copernica",
-  "version": "0.1",
+  "version": "1.0.3",
   "description": "Parse smarty templates with copernica data",
   "main": "index.js",
   "scripts": {
