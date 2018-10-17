@@ -1,0 +1,24 @@
+{
+  "name": "gulp-jsmart-copernica",
+  "version": "1.0.0",
+  "description": "Parse smarty templates with copernica data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwellner/gulp-jsmart-copernica.git"
+  },
+  "author": "Jeroen Wellner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwellner/gulp-jsmart-copernica/issues"
+  },
+  "homepage": "https://github.com/jwellner/gulp-jsmart-copernica#readme",
+  "dependencies": {
+    "jsmart": "git://github.com/jwellner/jsmart.git#fix-capture",
+    "plugin-error": "^1.0.1",
+    "through2": "^2.0.3"
+  }
+}
