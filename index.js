@@ -3,25 +3,16 @@ const PluginError = require('plugin-error');
 const jSmart = require('jsmart');
 
 /**
- * Copernica Database structure
- */
-var _DB = {
-	"Profiles": [],
-	"Content": [],
-	"Tiles": []
-};
-
-/**
  * Custom functions
  */
 jSmart.prototype.registerPlugin(
     'function',
     'loadprofile',
     function (params, data) {
-        let tmp = _DB[params["source"]][0];
+        let tmp = data[params["source"]][0];
 
         if (params["ArticleId"]) {
-            let found = _DB[params["source"]].find(function (obj) {
+            let found = data[params["source"]].find(function (obj) {
                 return obj["ArticleId"] == params["ArticleId"];
             });
 
@@ -41,7 +32,7 @@ jSmart.prototype.registerPlugin(
 jSmart.prototype.registerPlugin(
     'function',
     'base64_encode',
-    function(params, data) {
+    function (params, data) {
         return Buffer.from(params[0]).toString('base64');
     }
 );
@@ -82,9 +73,9 @@ jSmart.prototype.registerPlugin(
 );
 
 module.exports = function (options) {
-		if (!options) {
-			options = {};
-		}
+    if (!options) {
+        options = {};
+    }
 
     return through.obj(function (file, enc, cb) {
 
@@ -94,32 +85,22 @@ module.exports = function (options) {
         }
 
         if (file.isStream()) {
-        this.emit('error', new PluginError('gulp-jsmart-copernica', 'Streaming not supported'));
-        return cb();
+            this.emit('error', new PluginError('gulp-jsmart-copernica', 'Streaming not supported'));
+            return cb();
         }
-
-        if (file.data) {
-            _DB = file.data;
-				}
-
-				var profileData = {}
-
-				if (options.profileId) {
-					profileData = _DB["Profiles"][options.profileId];
-				} else {
-					profileData = _DB["Profiles"][0];
-				}
 
         let filePath = file.path;
 
         try {
             let compiledTemplate = new jSmart(file.contents.toString())
-            file.contents = Buffer.from(compiledTemplate.fetch(profileData));
+            file.contents = Buffer.from(compiledTemplate.fetch(file.data));
 
             this.push(file);
             cb();
         } catch (err) {
-            this.emit('error', new PluginError('gulp-copernica', err, {fileName: filePath}));
+            this.emit('error', new PluginError('gulp-jsmart-copernica', err, {
+                fileName: filePath
+            }));
             cb();
         }
     });
