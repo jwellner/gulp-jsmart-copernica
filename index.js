@@ -9,16 +9,20 @@ jSmart.prototype.registerPlugin(
     'function',
     'loadprofile',
     function (params, data) {
-        let tmp = data[params["source"]][0];
+        let tmp = {};
 
-        if (params["ArticleId"]) {
-            let found = data[params["source"]].find(function (obj) {
-                return obj["ArticleId"] == params["ArticleId"];
-            });
+        if (data[params["source"]] && Array.isArray(data[params["source"]]) && data[params["source"]] > 0) {
+            if (params["ArticleId"]) {
+                let found = data[params["source"]].find(function (obj) {
+                    return obj["ArticleId"] == params["ArticleId"];
+                });
 
-            if (found) {
-                tmp = found;
+                if (found) {
+                    tmp = found;
+                }
             }
+        } else {
+            console.log(params["source"] + ' does not exist or is not an Array');
         }
 
         if (params["assign"]) {
