@@ -11,7 +11,7 @@ jSmart.prototype.registerPlugin(
     function (params, data) {
         let tmp = {};
 
-        if (data[params["source"]] && Array.isArray(data[params["source"]]) && data[params["source"]] > 0) {
+        if (data[params["source"]] && Array.isArray(data[params["source"]]) && data[params["source"]].length > 0) {
             if (params["ArticleId"]) {
                 let found = data[params["source"]].find(function (obj) {
                     return obj["ArticleId"] == params["ArticleId"];
