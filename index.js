@@ -22,7 +22,7 @@ jSmart.prototype.registerPlugin(
                 }
             }
         } else {
-            console.log(params["source"] + ' does not exist or is not an Array');
+            console.log('smarty - loadprofile: ' + params["source"] + ' does not exist or is not an Array');
         }
 
         if (params["assign"]) {
