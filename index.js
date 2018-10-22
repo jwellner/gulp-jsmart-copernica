@@ -12,6 +12,7 @@ jSmart.prototype.registerPlugin(
         let tmp = {};
 
         if (data[params["source"]] && Array.isArray(data[params["source"]]) && data[params["source"]].length > 0) {
+
             if (params["ArticleId"]) {
                 let found = data[params["source"]].find(function (obj) {
                     return obj["ArticleId"] == params["ArticleId"];
@@ -20,6 +21,9 @@ jSmart.prototype.registerPlugin(
                 if (found) {
                     tmp = found;
                 }
+            } else {
+                // just return the first item.
+                tmp = data[params["source"]][0];
             }
         } else {
             console.log('smarty - loadprofile: ' + params["source"] + ' does not exist or is not an Array');
